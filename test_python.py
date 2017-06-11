@@ -12,8 +12,34 @@ def reshape_to_batchnumsteps_numclasses(y,num_classes):
         new_ys.append(new_y)
     return np.array(new_ys)
 
-
-
+#
+# y_eval = util.reshape_to_batchnumsteps_numclasses(y_val, self.num_classess)
+# loss_eval, logits_eval, test_seq_len = sess.run([
+#     self.loss,
+#     self.unary_scores,
+#     self.length,
+# ],
+#     feed_dict={
+#         self.inputs: X_eval,
+#         self.targets: y_eval
+#     })
+# y_eval_pred = self.predict(logits_eval, self.num_steps)
+# precison, recall, f1 = self.evaluate(X_eval, y_val, y_eval_pred, test_seq_len, id2word=id2word,
+#                                      id2label=id2label)
+# print 'evalution on eval data is eval_loss%f,precison%f,recall%f,f1%f' % (
+#     loss_eval, precison, recall, f1)
+# else:
+# loss_eval, unary_score, test_seq_len, transMatrix = sess.run(
+#     [self.loss,
+#      self.unary_scores,
+#      self.length,
+#      self.transition_params],
+#     feed_dict=feed_dict
+# )
+# print unary_scores.shape
+# y_eval_pred_crf = self.viterbi_decode_batch(unary_scores, test_seq_len, transMatrix)
+# print len(y_eval_pred_crf)
+# print len(y_val)
 
 
 def predict(logits,nums_step,lenghts):
@@ -35,11 +61,20 @@ def predict(logits,nums_step,lenghts):
 
         #y_pred = [batch_size,nums_step]
     return y_preds
-y = np.array([[1,2,1,2,2],[2,3,1,0,0]])
-y = reshape_to_batchnumsteps_numclasses(y,3)
-print y
-lengths = [5,3]
-print predict(y,5,lengths)
+
+def test(y_val,num_classess,num_steps):
+    import util
+
+    y_eval = util.reshape_to_batchnumsteps_numclasses(y_val, num_classess)
+    print y_eval
+    y_eval = util.reshape_to_batch_numsteps(y_eval, num_classess, num_steps)
+    print y_eval
+y = np.array([[1,2,1,2,2],[2,3,1,0,0]],dtype=int)
+test(y,3,5)
+# y = reshape_to_batchnumsteps_numclasses(y,3)
+# print y
+# lengths = [5,3]
+# print predict(y,5,lengths)
 
 #batch 50
 #hidden  60 90

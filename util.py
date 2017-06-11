@@ -41,14 +41,14 @@ def buildMap(train_path):
     id2word = dict(zip(range(1,len(words)+1),words))
     id2label = dict(zip(range(1, len(labels) + 1), labels))
     id2word[0] = "<PAD>"
-    # id2label[0] = "<PAD>"
+    id2label[0] = "<PAD>"
     word2id["<PAD>"] = 0
-    # label2id["<PAD>"] = 0
+    label2id["<PAD>"] = 0
 
     id2word[len(words)+1] = "<NEW>"
-    # id2label[len(labels)+1] = "<NEW>"
+    id2label[len(labels)+1] = "<NEW>"
     word2id["<NEW>"] = len(words)+1
-    # label2id["<NEW>"] = len(labels)+1
+    label2id["<NEW>"] = len(labels)+1
     saveMap(id2word,id2label)
     return word2id,id2word,label2id,id2label
 
@@ -216,6 +216,7 @@ def reshape_to_batchnumsteps_numclasses(y,num_classes):
         for j in range(len(y[i])):
             id = y[i][j]
             l = np.zeros((num_classes))
+
             l[id - 1] = 1
             new_y.append(l)
         new_ys.append(new_y)

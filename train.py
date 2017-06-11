@@ -65,31 +65,6 @@ with tf.Session() as sess:
 
     init = tf.global_variables_initializer()
     sess.run(init)
-#    sess.run(model.logits)
-#     print y_train.shape
-    #sess.run(model.inputs)
-    # X_train_batch, y_train_batch = util.nextBatch(X_train, y_train, start_index=0,
-    #                                               batch_size=100)
-    #
-    # y_train_batch = util.reshape_to_batchnumsteps_numclasses(y_train_batch, 3)
-    # # y_train = util.reshape_to_batchnumsteps_numclasses(y_train, 3)
-    # # print X_train_batch.shape
-    # # print y_train_batch.shape
-    # # print sess.run([],feed_dict={model.inputs:X_train_batch,model.targets:y_train_batch})
-    #
-    # input_emb,outputs,loss_,opt, loss_train, logits_train = sess.run([
-    #     model.inputs_emb,
-    #     model.outputs,
-    #     model.loss_,
-    #     model.optimizer,
-    #     model.loss,
-    #     model.logits
-    #
-    # ],
-    #     feed_dict={
-    #         model.inputs: X_train_batch,
-    #         model.targets: y_train_batch
-    #     })
     model.train(sess,save_path,X_train,y_train,X_eval,y_eval)
     # print input_emb.shape
     # print outputs.shape
