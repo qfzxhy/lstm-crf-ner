@@ -29,6 +29,7 @@ evaluation_path = 'evaluation_data'
 num_steps = int(args.num_steps)
 num_hiddens = int(args.num_hiddens)
 num_layers = int(args.num_layers)
+is_crf =True
 print 'paras:'
 print 'num_steps:%d'%num_steps
 print 'num_hiddens:%d'%num_hiddens
@@ -38,6 +39,8 @@ word2id,_ = util.loadMap('data/word2id')
 label2id,_ = util.loadMap('data/label2id')
 num_words = len(word2id)
 num_classes = len(label2id)
+if not is_crf:
+    num_classes = num_classes-2
 if emb_path != None:
     embedding_matrix = util.getEmbedding(emb_path)
 else:

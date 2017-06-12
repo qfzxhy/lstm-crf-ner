@@ -39,7 +39,7 @@ class BILSTM(object):
         self.is_crf = is_crf
         self.if_l2 = l2_loss
         self.learning_rate = 0.05
-        self.batch_size = 50
+        self.batch_size = 100
         self.num_epochs = 20
         self.max_f1 = -1.0
 
@@ -343,7 +343,6 @@ class BILSTM(object):
             seq_len = int(test_seq_len[i])
             x = [id2word[X[i][j]] for j in range(seq_len)]
             y = ''.join([id2label[y_gold[i][j]] for j in range(seq_len)])
-
             y_p = ''.join([id2label[y_pred[i][j]] for j in range(seq_len)])
             entity_gold = util.extractEntity(x,y)
             entity_pred = util.extractEntity(x,y_p)

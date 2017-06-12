@@ -19,7 +19,7 @@ parser.add_argument('--num_layers',default=1)
 args = parser.parse_args()
 train_path = args.train_path
 save_path = args.save_path
-
+is_crf = True
 # train_path = 'restaurant2015/traindata'
 eval_path = args.val_path
 emb_path = args.wordemb_path
@@ -45,6 +45,8 @@ word2id,_ = util.loadMap('data/word2id')
 label2id,_ = util.loadMap('data/label2id')
 num_words = len(word2id)
 num_classes = len(label2id)
+if not is_crf:
+    num_classes = num_classes-2
 if emb_path != None:
     embedding_matrix = util.getEmbedding(emb_path)
 else:
